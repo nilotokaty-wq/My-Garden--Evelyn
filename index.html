@@ -1,0 +1,1293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>A Garden Made of You — Evelyn</title>
+  
+  <!-- Premium Romantic Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --romantic-rose: #f4a6b5;
+      --deep-crimson: #8c2a3e;
+      --twilight-sky-top: #101227;
+      --twilight-sky-mid: #252243;
+      --twilight-sky-glow: #63435c;
+      --warm-amber: #f8c99b;
+      --petal-pink: #ffd9e2;
+      --cream-paper: #fcf9f2;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+      background: linear-gradient(180deg, 
+        #0e0f24 0%, 
+        #1d1a3b 30%, 
+        #3b294a 55%, 
+        #6d445c 75%, 
+        #b27479 92%, 
+        #e5a499 100%);
+      color: #fff;
+    }
+
+    /* Ambient atmospheric background lighting & bokeh */
+    .sky-aura {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      background: radial-gradient(circle at 50% 35%, rgba(255, 222, 190, 0.18) 0%, rgba(180, 110, 150, 0.08) 45%, transparent 70%);
+    }
+
+    /* Glowing Ethereal Moon */
+    .celestial-moon {
+      position: absolute;
+      top: 7%;
+      right: 14%;
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fffef7 0%, #fff4df 35%, rgba(255, 235, 210, 0.8) 60%, rgba(255, 220, 180, 0) 100%);
+      box-shadow: 
+        0 0 50px 18px rgba(255, 240, 215, 0.35),
+        0 0 100px 45px rgba(255, 200, 180, 0.2);
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(0.5px);
+      animation: moonSway 10s ease-in-out infinite alternate;
+    }
+
+    @keyframes moonSway {
+      0% { transform: translateY(0px) scale(1); opacity: 0.92; }
+      100% { transform: translateY(-8px) scale(1.03); opacity: 1; }
+    }
+
+    /* Subtle God-Rays / Mist */
+    .mist-layer {
+      position: absolute;
+      bottom: 25%;
+      left: -20%;
+      width: 140%;
+      height: 35%;
+      background: radial-gradient(ellipse at center, rgba(255, 220, 230, 0.12) 0%, rgba(210, 160, 190, 0.04) 50%, transparent 80%);
+      filter: blur(25px);
+      pointer-events: none;
+      z-index: 2;
+      animation: mistDrift 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes mistDrift {
+      0% { transform: translateX(-2%) translateY(0); }
+      100% { transform: translateX(2%) translateY(-15px); }
+    }
+
+    /* Fullscreen Simulation Canvas for Falling Petals & Pollen */
+    #fx-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Hero Typography Container */
+    .hero-container {
+      position: relative;
+      z-index: 6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 4vh 20px 0 20px;
+      max-width: 850px;
+      margin: 0 auto;
+      pointer-events: none;
+    }
+
+    .sub-tag {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.7rem, 1.8vw, 0.85rem);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255, 238, 230, 0.85);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .sub-tag::before, .sub-tag::after {
+      content: "";
+      width: 32px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 220, 210, 0.6), transparent);
+    }
+
+    .hero-title {
+      font-size: clamp(2.4rem, 6.2vw, 4.4rem);
+      font-weight: 300;
+      line-height: 1.18;
+      letter-spacing: 1px;
+      color: #fffcf9;
+      text-shadow: 0 4px 30px rgba(22, 10, 24, 0.5), 0 0 50px rgba(255, 210, 220, 0.25);
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      color: #ffdce5;
+      text-shadow: 0 0 25px rgba(255, 175, 195, 0.6);
+    }
+
+    .hero-quote {
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #fce8ee;
+      margin-top: 10px;
+      max-width: 600px;
+      line-height: 1.6;
+      text-shadow: 0 2px 15px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Actions & Floating Letter Envelope Button */
+    .action-panel {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      pointer-events: auto;
+    }
+
+    .letter-btn {
+      position: relative;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      padding: 13px 32px;
+      border-radius: 50px;
+      color: #fffdfc;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 2.2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 30px -5px rgba(200, 90, 130, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+      transition: all 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+
+    .letter-btn:hover {
+      background: rgba(255, 255, 255, 0.28);
+      transform: translateY(-3px) scale(1.03);
+      border-color: rgba(255, 240, 245, 0.8);
+      box-shadow: 0 16px 36px -4px rgba(255, 130, 170, 0.5), 0 0 20px rgba(255, 210, 225, 0.4);
+    }
+
+    .letter-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #ffd7e2;
+      stroke-width: 1.8;
+      transition: transform 0.4s ease;
+    }
+
+    .letter-btn:hover svg {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    /* Ambient Audio Toggle */
+    .audio-toggle-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: #ffeef2;
+      transition: all 0.35s ease;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    .audio-toggle-btn:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: scale(1.08);
+    }
+
+    .audio-toggle-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    .garden-hint {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      letter-spacing: 1px;
+      color: rgba(255, 240, 245, 0.7);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+
+    /* THE LUSH MEADOW LAYERS */
+    .meadow-viewport {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 54vh;
+      min-height: 380px;
+      pointer-events: none;
+      z-index: 4;
+      overflow: hidden;
+    }
+
+    /* Meadow Background Gradients & Hills */
+    .meadow-hill-bg {
+      position: absolute;
+      bottom: -40px;
+      left: -10%;
+      width: 120%;
+      height: 340px;
+      background: radial-gradient(ellipse at 50% 100%, #173322 0%, #102619 60%, transparent 100%);
+      opacity: 0.85;
+      filter: blur(12px);
+      z-index: 1;
+    }
+
+    .meadow-layer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      pointer-events: none;
+    }
+
+    .meadow-layer.back {
+      z-index: 2;
+      opacity: 0.82;
+      filter: blur(1px) brightness(0.85);
+      transform: scale(0.92);
+      transform-origin: bottom center;
+    }
+
+    .meadow-layer.mid {
+      z-index: 3;
+      opacity: 0.95;
+    }
+
+    .meadow-layer.front {
+      z-index: 5;
+    }
+
+    /* SVG Flower & Stem Styling */
+    .flower-plant {
+      position: absolute;
+      bottom: 0;
+      pointer-events: auto;
+      cursor: pointer;
+      transform-origin: bottom center;
+      transition: filter 0.3s ease;
+      will-change: transform;
+    }
+
+    .flower-plant:hover {
+      filter: drop-shadow(0 0 14px rgba(255, 200, 220, 0.8)) brightness(1.12);
+    }
+
+    /* Interactive Plant Click Effect */
+    .flower-plant:active {
+      transform: scale(0.96) !important;
+    }
+
+    /* Realistic Multi-flap 3D Butterflies */
+    .butterfly-entity {
+      position: fixed;
+      width: 44px;
+      height: 38px;
+      pointer-events: auto;
+      cursor: pointer;
+      z-index: 8;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: filter 0.3s;
+    }
+
+    .butterfly-entity:hover {
+      filter: drop-shadow(0 0 8px #ffb2cc);
+    }
+
+    .bf-body {
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      width: 4px;
+      height: 18px;
+      background: #2b121c;
+      border-radius: 3px;
+      z-index: 2;
+    }
+
+    .bf-wing {
+      position: absolute;
+      top: 0;
+      width: 22px;
+      height: 32px;
+      background-size: cover;
+      transform-origin: 22px 14px;
+      filter: drop-shadow(0 2px 5px rgba(0,0,0,0.25));
+    }
+
+    .bf-wing.left {
+      left: 0;
+      transform-origin: right center;
+      animation: flapLeft 0.18s ease-in-out infinite alternate;
+    }
+
+    .bf-wing.right {
+      left: 22px;
+      transform-origin: left center;
+      animation: flapRight 0.18s ease-in-out infinite alternate;
+    }
+
+    @keyframes flapLeft {
+      0% { transform: perspective(400px) rotateY(0deg); }
+      100% { transform: perspective(400px) rotateY(68deg); }
+    }
+
+    @keyframes flapRight {
+      0% { transform: perspective(400px) rotateY(0deg); }
+      100% { transform: perspective(400px) rotateY(-68deg); }
+    }
+
+    /* ROMANTIC LOVE NOTE MODAL (WAX-SEALED VINTAGE LETTER) */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 12, 24, 0.72);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .modal-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .letter-envelope {
+      position: relative;
+      background: var(--cream-paper);
+      color: #3b2a33;
+      max-width: 540px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 44px 38px 38px 38px;
+      box-shadow: 
+        0 25px 65px rgba(0, 0, 0, 0.45), 
+        0 0 0 1px rgba(220, 185, 175, 0.4),
+        inset 0 0 45px rgba(240, 218, 202, 0.65);
+      transform: scale(0.85) translateY(30px) rotate(-1deg);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .modal-backdrop.active .letter-envelope {
+      transform: scale(1) translateY(0) rotate(0deg);
+    }
+
+    /* Pressed flowers border aesthetic */
+    .letter-envelope::before {
+      content: "";
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(180, 130, 145, 0.25);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .pressed-flower-dec {
+      position: absolute;
+      width: 65px;
+      height: 65px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+
+    .dec-top-right {
+      top: 15px;
+      right: 15px;
+      transform: rotate(25deg);
+    }
+
+    .dec-bottom-left {
+      bottom: 15px;
+      left: 15px;
+      transform: rotate(-35deg);
+    }
+
+    .letter-heading {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #925367;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .letter-body {
+      font-size: 1.35rem;
+      line-height: 1.75;
+      font-weight: 400;
+      color: #43323b;
+      margin-bottom: 24px;
+      text-align: left;
+    }
+
+    .letter-body p {
+      margin-bottom: 14px;
+      text-indent: 1.5em;
+    }
+
+    .letter-body p:first-of-type {
+      text-indent: 0;
+    }
+
+    .letter-signature {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem;
+      text-align: right;
+      color: #7d3b50;
+      margin-top: 15px;
+    }
+
+    .wax-seal-btn {
+      margin: 25px auto 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #a4344d, #7b1931);
+      color: #fcecef;
+      border: none;
+      padding: 10px 26px;
+      border-radius: 40px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.82rem;
+      letter-spacing: 2px;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(130, 30, 55, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .wax-seal-btn:hover {
+      background: linear-gradient(135deg, #b83d57, #8e203a);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(130, 30, 55, 0.45);
+    }
+
+    /* Floating interaction notifications */
+    .bloom-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(50px);
+      background: rgba(30, 24, 45, 0.85);
+      border: 1px solid rgba(255, 220, 230, 0.3);
+      backdrop-filter: blur(10px);
+      padding: 10px 24px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      color: #ffe6ed;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.5s ease;
+      z-index: 90;
+      font-style: italic;
+    }
+
+    .bloom-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .meadow-viewport {
+        height: 60vh;
+      }
+      .letter-envelope {
+        padding: 34px 24px 28px 24px;
+      }
+      .letter-body {
+        font-size: 1.18rem;
+        line-height: 1.65;
+      }
+      .hero-container {
+        padding-top: 3vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Atmospheric Sky Background Layers -->
+  <div class="sky-aura"></div>
+  <div class="celestial-moon"></div>
+  <div class="mist-layer"></div>
+
+  <!-- Simulation Canvas for realistic falling petals, fireflies, and blooming stardust -->
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Central Romantic Greeting -->
+  <main class="hero-container">
+    <div class="sub-tag">Enchanted Sanctuary</div>
+    <h1 class="hero-title">In every petal, a thought of <em>you</em></h1>
+    <p class="hero-quote">
+      "You make me feel softer, warmer, and endlessly in bloom. 
+      To the beautiful you."
+    </p>
+
+    <div class="action-panel">
+      <button class="letter-btn" id="btnOpenLetter" aria-label="Open Love Note">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        <span>Open My Letter</span>
+      </button>
+
+      <button class="audio-toggle-btn" id="btnAudioToggle" title="Play soothing acoustic chimes">
+        <svg id="audioIconOff" viewBox="0 0 24 24">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+          <line x1="23" y1="9" x2="17" y2="15" stroke="currentColor" stroke-width="2"></line>
+          <line x1="17" y1="9" x2="23" y2="15" stroke="currentColor" stroke-width="2"></line>
+        </svg>
+        <svg id="audioIconOn" viewBox="0 0 24 24" style="display: none;">
+          <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2"></path>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" fill="none" stroke="currentColor" stroke-width="2"></path>
+        </svg>
+      </button>
+    </div>
+
+    <div class="garden-hint">✨ Tip: Tap anywhere on the grass to sprout new flowers</div>
+  </main>
+
+  <!-- The Multi-Tiered Lush Meadow (Background, Midground, Foreground) -->
+  <section class="meadow-viewport" id="meadowViewport">
+    <div class="meadow-hill-bg"></div>
+    <div class="meadow-layer back" id="layerBack"></div>
+    <div class="meadow-layer mid" id="layerMid"></div>
+    <div class="meadow-layer front" id="layerFront"></div>
+  </section>
+
+  <!-- Wax-Sealed Vintage Letter Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="letter-envelope">
+      <!-- Decorative Botanical Corners -->
+      <svg class="pressed-flower-dec dec-top-right" viewBox="0 0 100 100">
+        <path fill="#a6546b" d="M50,15 C55,2 65,2 70,15 C85,15 90,25 80,38 C92,48 88,60 74,62 C74,78 60,82 50,70 C40,82 26,78 26,62 C12,60 8,48 20,38 C10,25 15,15 30,15 C35,2 45,2 50,15 Z" />
+        <circle cx="50" cy="40" r="8" fill="#e5b45f" />
+      </svg>
+      <svg class="pressed-flower-dec dec-bottom-left" viewBox="0 0 100 100">
+        <path fill="#6c8f71" d="M10,90 Q40,60 70,30 Q45,55 20,65 Z M30,70 Q55,45 80,20 Q60,45 35,55 Z" />
+      </svg>
+
+      <div class="letter-heading">To my Evelyn </div>
+      <div class="letter-body">
+        <p>I wanted to give you a garden that never wilts, where the sunset never fades, and where every gentle breeze carries a reminder of how special you are.</p>
+        <p>Like wildflowers finding light in the way you are, you have a way of making me gentler, kinder, and effortlessly trying hard for you. Whenever you look at these flowers, remember that you are loved beyond words.</p>
+      </div>
+      <div class="letter-signature">From your biggest Fan ❤️</div>
+
+      <button class="wax-seal-btn" id="btnCloseLetter">
+        <span>Keep in Heart</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="bloom-toast" id="bloomToast">A new flower has blossomed for you 🌸</div>
+
+  <script>
+    /* ==========================================================================
+       1. PROCEDURAL REALISTIC BOTANICAL SVGs (Roses, Tulips, Lavender, Cosmos)
+       ========================================================================== */
+    const FlowerSVGs = {
+      // English Garden Rose: Multi-tiered layered cupped petals with rich gradient tones
+      rose: (hue = 345, scale = 1) => `
+        <svg width="${76 * scale}" height="${260 * scale}" viewBox="0 0 100 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="roseStemGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#1b4526"/>
+              <stop offset="50%" stop-color="#3d7547"/>
+              <stop offset="100%" stop-color="#16381e"/>
+            </linearGradient>
+            <radialGradient id="rosePetalGrad1" cx="45%" cy="35%" r="65%">
+              <stop offset="0%" stop-color="hsl(${hue + 15}, 90%, 82%)"/>
+              <stop offset="55%" stop-color="hsl(${hue}, 80%, 58%)"/>
+              <stop offset="100%" stop-color="hsl(${hue - 15}, 85%, 35%)"/>
+            </radialGradient>
+            <radialGradient id="rosePetalGrad2" cx="50%" cy="30%" r="70%">
+              <stop offset="0%" stop-color="hsl(${hue + 20}, 95%, 88%)"/>
+              <stop offset="60%" stop-color="hsl(${hue + 5}, 78%, 64%)"/>
+              <stop offset="100%" stop-color="hsl(${hue - 10}, 80%, 42%)"/>
+            </radialGradient>
+          </defs>
+          <!-- Curved Organic Stem -->
+          <path d="M50 85 Q47 180 52 320" stroke="url(#roseStemGrad)" stroke-width="7" stroke-linecap="round"/>
+          <!-- Delicate Thorn & Leaves -->
+          <path d="M50 180 Q30 165 20 185 Q35 195 50 186" fill="#2d6139"/>
+          <path d="M50 220 Q70 205 82 225 Q65 235 50 226" fill="#295934"/>
+          <path d="M48 140 Q43 148 39 146" stroke="#234a2c" stroke-width="3" stroke-linecap="round"/>
+          
+          <!-- Outer Rose Petals (Tier 1) -->
+          <path d="M22 62 C15 35 40 18 50 25 C60 18 85 35 78 62 C70 85 30 85 22 62 Z" fill="url(#rosePetalGrad1)"/>
+          <path d="M12 55 C12 28 35 22 50 35 C65 22 88 28 88 55 C85 88 15 88 12 55 Z" fill="url(#rosePetalGrad1)" opacity="0.85"/>
+          
+          <!-- Mid Petals (Tier 2) -->
+          <path d="M26 48 C20 30 38 18 50 28 C62 18 80 30 74 48 C70 68 30 68 26 48 Z" fill="url(#rosePetalGrad2)"/>
+          <!-- Inner Swirled Bud Petals (Tier 3) -->
+          <path d="M34 40 C34 26 45 20 50 25 C55 20 66 26 66 40 C64 56 36 56 34 40 Z" fill="url(#rosePetalGrad1)"/>
+          <path d="M42 35 C42 27 48 24 50 26 C52 24 58 27 58 35 C58 44 42 44 42 35 Z" fill="#fff0f4"/>
+        </svg>
+      `,
+
+      // Dutch Tulip: Silky cupped gradient petals & arching broad botanical leaf
+      tulip: (hue = 350, scale = 1) => `
+        <svg width="${70 * scale}" height="${280 * scale}" viewBox="0 0 90 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="tulipStem" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#2a5832"/>
+              <stop offset="100%" stop-color="#468352"/>
+            </linearGradient>
+            <linearGradient id="tulipPetal" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="hsl(${hue + 15}, 90%, 82%)"/>
+              <stop offset="50%" stop-color="hsl(${hue}, 85%, 60%)"/>
+              <stop offset="100%" stop-color="hsl(${hue - 20}, 80%, 40%)"/>
+            </linearGradient>
+          </defs>
+          <!-- Stem -->
+          <path d="M45 75 Q42 180 46 320" stroke="url(#tulipStem)" stroke-width="6" stroke-linecap="round"/>
+          <!-- Wide Graceful Tulip Leaf -->
+          <path d="M45 210 Q75 140 75 90 Q65 170 45 230 Z" fill="#326b3c" opacity="0.9"/>
+          <!-- Left Petal -->
+          <path d="M45 70 C28 68 20 40 26 20 C34 10 44 25 45 70 Z" fill="url(#tulipPetal)"/>
+          <!-- Right Petal -->
+          <path d="M45 70 C62 68 70 40 64 20 C56 10 46 25 45 70 Z" fill="url(#tulipPetal)"/>
+          <!-- Central Cupped Overlapping Petal -->
+          <path d="M30 65 C30 25 40 8 45 8 C50 8 60 25 60 65 C55 76 35 76 30 65 Z" fill="hsl(${hue + 5}, 90%, 68%)"/>
+        </svg>
+      `,
+
+      // Wild Lavender / Salvia Spire: Graceful tapered vertical blossoms
+      lavender: (hue = 265, scale = 1) => `
+        <svg width="${55 * scale}" height="${300 * scale}" viewBox="0 0 70 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="lavStem" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4e7c54"/>
+              <stop offset="100%" stop-color="#1c4222"/>
+            </linearGradient>
+          </defs>
+          <path d="M35 50 Q33 190 35 340" stroke="url(#lavStem)" stroke-width="4.5" stroke-linecap="round"/>
+          <!-- Tiny delicate florets grouped up the spire -->
+          ${[
+            [35, 30, 8], [32, 42, 10], [38, 44, 9], [30, 56, 12], [40, 58, 11],
+            [28, 72, 13], [42, 75, 13], [27, 90, 14], [43, 92, 14], [26, 110, 15], 
+            [44, 112, 15], [28, 130, 14], [42, 132, 14], [30, 150, 13], [40, 152, 13]
+          ].map(([x, y, r]) => `
+            <circle cx="${x}" cy="${y}" r="${r}" fill="hsl(${hue + Math.floor(Math.random()*20 - 10)}, 75%, 68%)" opacity="0.95"/>
+            <circle cx="${x + (x > 35 ? -2 : 2)}" cy="${y - 1}" r="${r * 0.5}" fill="#ffffff" opacity="0.4"/>
+          `).join('')}
+          <path d="M35 220 Q15 190 20 160 Q26 195 35 230 Z" fill="#3a6941"/>
+        </svg>
+      `,
+
+      // Pastel Cosmos / Daisy: Radiating soft petals with bright glowing pistil
+      cosmos: (hue = 330, scale = 1) => `
+        <svg width="${85 * scale}" height="${260 * scale}" viewBox="0 0 110 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="cosmosCenter" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#fff8b3"/>
+              <stop offset="60%" stop-color="#f7b731"/>
+              <stop offset="100%" stop-color="#c77800"/>
+            </radialGradient>
+          </defs>
+          <path d="M55 75 Q52 180 55 300" stroke="#32633a" stroke-width="5" stroke-linecap="round"/>
+          <!-- Feathery Dill-like Leaves -->
+          <path d="M55 180 Q30 160 20 140 M55 190 Q35 185 15 190" stroke="#32633a" stroke-width="2.5" stroke-linecap="round"/>
+          <path d="M55 210 Q80 190 90 170 M55 220 Q75 215 95 220" stroke="#32633a" stroke-width="2.5" stroke-linecap="round"/>
+          
+          <!-- Radiating Petals -->
+          <g transform="translate(55, 75)">
+            ${[0, 45, 90, 135, 180, 225, 270, 315].map(deg => `
+              <path d="M-9 -10 C-14 -35 -6 -50 0 -50 C6 -50 14 -35 9 -10 Z" 
+                    fill="hsl(${hue}, 88%, ${deg % 90 === 0 ? '82%' : '74%'})" 
+                    transform="rotate(${deg})" 
+                    opacity="0.94"/>
+            `).join('')}
+            <circle cx="0" cy="0" r="12" fill="url(#cosmosCenter)" filter="drop-shadow(0 0 4px rgba(255,220,100,0.8))"/>
+          </g>
+        </svg>
+      `,
+
+      // Gypsophila / Baby's Breath: Cloud-like ethereal white and pale pink mist
+      gypsophila: (hue = 330, scale = 1) => `
+        <svg width="${90 * scale}" height="${240 * scale}" viewBox="0 0 120 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M60 280 L60 170 Q40 120 25 70 M60 180 Q85 130 95 80 M60 140 Q55 90 60 40" stroke="#48704e" stroke-width="3" stroke-linecap="round"/>
+          ${[
+            [25, 70], [20, 60], [35, 55], [15, 80],
+            [95, 80], [105, 70], [85, 65], [100, 95],
+            [60, 40], [50, 30], [70, 25], [58, 15]
+          ].map(([x, y]) => `
+            <circle cx="${x}" cy="${y}" r="5" fill="#ffffff" opacity="0.95"/>
+            <circle cx="${x}" cy="${y}" r="2" fill="#ffd5e2"/>
+          `).join('')}
+        </svg>
+      `
+    };
+
+    /* ==========================================================================
+       2. MEADOW GENERATION (Multi-Layer Depth & Wind Sway)
+       ========================================================================== */
+    const meadowLayers = {
+      back: document.getElementById('layerBack'),
+      mid: document.getElementById('layerMid'),
+      front: document.getElementById('layerFront')
+    };
+
+    const flowerSpecies = ['rose', 'tulip', 'lavender', 'cosmos', 'gypsophila'];
+    const colorHues = [335, 348, 358, 275, 295, 215, 42]; // Roses, Pinks, Lilacs, Soft Blues, Warm Cream
+
+    const activePlants = [];
+
+    function populateMeadow() {
+      // Density configurations for device aspect ratios
+      const screenWidth = window.innerWidth;
+      const count = screenWidth < 768 ? 24 : 45;
+
+      for (let i = 0; i < count; i++) {
+        // Distribute between front (30%), mid (45%), back (25%)
+        let layerName = 'mid';
+        const rand = Math.random();
+        if (rand < 0.25) layerName = 'back';
+        else if (rand > 0.7) layerName = 'front';
+
+        createPlantInLayer(layerName, (i / count) * 100 + (Math.random() * 4 - 2));
+      }
+    }
+
+    function createPlantInLayer(layerName, percentX, customType = null, customHue = null) {
+      const layerEl = meadowLayers[layerName];
+      if (!layerEl) return;
+
+      const type = customType || flowerSpecies[Math.floor(Math.random() * flowerSpecies.length)];
+      const hue = customHue !== null ? customHue : colorHues[Math.floor(Math.random() * colorHues.length)];
+
+      let scale = 1;
+      if (layerName === 'back') scale = 0.72 + Math.random() * 0.15;
+      else if (layerName === 'mid') scale = 0.9 + Math.random() * 0.2;
+      else scale = 1.1 + Math.random() * 0.25;
+
+      const plantEl = document.createElement('div');
+      plantEl.className = 'flower-plant';
+      plantEl.style.left = `${Math.max(1, Math.min(97, percentX))}%`;
+      plantEl.innerHTML = FlowerSVGs[type](hue, scale);
+
+      // Unique wind physics properties per stem
+      const plantObj = {
+        element: plantEl,
+        baseX: percentX,
+        phase: Math.random() * Math.PI * 2,
+        speed: 0.8 + Math.random() * 0.8,
+        flexibility: layerName === 'front' ? 4.5 : (layerName === 'mid' ? 3.2 : 2.0),
+        bloomScale: 1
+      };
+
+      // Click flower to burst sparkles & gently chime
+      plantEl.addEventListener('click', (e) => {
+        e.stopPropagation();
+        triggerFlowerSparkles(e.clientX, e.clientY);
+        playGentleChime(350 + Math.random() * 400);
+        showToast("You plucked a moment of joy 🌸");
+        
+        // Gentle bounce animation
+        plantObj.bloomScale = 1.25;
+        setTimeout(() => { plantObj.bloomScale = 1; }, 400);
+      });
+
+      layerEl.appendChild(plantEl);
+      activePlants.push(plantObj);
+    }
+
+    /* ==========================================================================
+       3. NATURAL WIND SIMULATION & CONTINUOUS MOTION
+       ========================================================================== */
+    let globalWindTime = 0;
+
+    function animateMeadowWind() {
+      globalWindTime += 0.016;
+
+      // Global breeze gust wave passing through the meadow
+      const breezeGust = Math.sin(globalWindTime * 0.8) * 1.8 + Math.sin(globalWindTime * 0.3) * 2.2;
+
+      for (let i = 0; i < activePlants.length; i++) {
+        const p = activePlants[i];
+        // Calculate individual sway based on natural wind physics + phase
+        const plantSway = Math.sin(globalWindTime * p.speed + p.phase) * p.flexibility + (breezeGust * (p.flexibility * 0.4));
+        p.element.style.transform = `rotate(${plantSway.toFixed(2)}deg) scale(${p.bloomScale})`;
+      }
+
+      requestAnimationFrame(animateMeadowWind);
+    }
+
+    /* ==========================================================================
+       4. INTERACTIVE BOTANICAL DISCOVERY (Click anywhere to plant a flower)
+       ========================================================================== */
+    window.addEventListener('pointerdown', (e) => {
+      // Don't trigger if interacting with UI buttons or letter card
+      if (e.target.closest('#modalBackdrop') || e.target.closest('.action-panel')) return;
+
+      const clickX = e.clientX;
+      const clickY = e.clientY;
+      const percentX = (clickX / window.innerWidth) * 100;
+
+      // Sprout instant flower at bottom corresponding to horizontal click
+      const type = flowerSpecies[Math.floor(Math.random() * flowerSpecies.length)];
+      const hue = colorHues[Math.floor(Math.random() * colorHues.length)];
+      createPlantInLayer('front', percentX, type, hue);
+
+      // Burst pollen star dust
+      createPollenBurst(clickX, clickY);
+      playGentleChime(420 + Math.random() * 300);
+    });
+
+    /* ==========================================================================
+       5. 3D FLUTTERING BUTTERFLIES WITH CURSOR-FOLLOWING & GLIDING PHYSICS
+       ========================================================================== */
+    class ButterflyEntity {
+      constructor() {
+        this.el = document.createElement('div');
+        this.el.className = 'butterfly-entity';
+
+        // Wing SVG with glowing soft gradient
+        const wingSvg = `
+          <svg viewBox="0 0 50 70" width="100%" height="100%">
+            <defs>
+              <linearGradient id="bfGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#fff4f7"/>
+                <stop offset="40%" stop-color="#ff99b6"/>
+                <stop offset="85%" stop-color="#7e3256"/>
+                <stop offset="100%" stop-color="#2a0d1d"/>
+              </linearGradient>
+            </defs>
+            <path d="M50 35 C50 10 30 0 10 0 C0 0 0 25 15 40 C0 45 0 65 15 70 C35 70 50 55 50 35 Z" fill="url(#bfGrad)"/>
+            <circle cx="20" cy="22" r="3" fill="#ffffff" opacity="0.6"/>
+            <circle cx="25" cy="52" r="2" fill="#ffffff" opacity="0.6"/>
+          </svg>
+        `;
+
+        this.el.innerHTML = `
+          <div class="bf-body"></div>
+          <div class="bf-wing left">${wingSvg}</div>
+          <div class="bf-wing right" style="transform: scaleX(-1);">${wingSvg}</div>
+        `;
+
+        document.body.appendChild(this.el);
+
+        this.x = Math.random() * window.innerWidth;
+        this.y = window.innerHeight * 0.4 + Math.random() * (window.innerHeight * 0.4);
+        this.targetX = this.x;
+        this.targetY = this.y;
+        this.vx = 0;
+        this.vy = 0;
+        this.flutterPhase = Math.random() * 10;
+        this.pickNewTarget();
+
+        // Butterfly interaction
+        this.el.addEventListener('click', (e) => {
+          e.stopPropagation();
+          createPollenBurst(this.x, this.y);
+          playGentleChime(680);
+          showToast("A butterfly brought you a secret wish 🦋");
+          this.targetX = Math.random() * window.innerWidth;
+          this.targetY = Math.random() * (window.innerHeight * 0.5);
+        });
+      }
+
+      pickNewTarget() {
+        this.targetX = 60 + Math.random() * (window.innerWidth - 120);
+        this.targetY = window.innerHeight * 0.35 + Math.random() * (window.innerHeight * 0.5);
+        this.targetTimer = setTimeout(() => this.pickNewTarget(), 3500 + Math.random() * 4500);
+      }
+
+      update() {
+        // Accelerate smoothly towards target
+        const dx = this.targetX - this.x;
+        const dy = this.targetY - this.y;
+
+        this.vx += dx * 0.0012;
+        this.vy += dy * 0.0012;
+
+        this.vx *= 0.94;
+        this.vy *= 0.94;
+
+        this.flutterPhase += 0.08;
+        const flutterWobbleX = Math.sin(this.flutterPhase) * 1.6;
+        const flutterWobbleY = Math.cos(this.flutterPhase * 1.5) * 1.8;
+
+        this.x += this.vx + flutterWobbleX;
+        this.y += this.vy + flutterWobbleY;
+
+        // Face movement direction
+        const angle = Math.atan2(this.vy, this.vx) * (180 / Math.PI);
+        const flip = this.vx < 0 ? 'scaleX(-1)' : 'scaleX(1)';
+
+        this.el.style.transform = `translate3d(${this.x.toFixed(1)}px, ${this.y.toFixed(1)}px, 0) rotate(${angle * 0.3}deg) ${flip}`;
+      }
+    }
+
+    const butterflies = Array.from({ length: 4 }, () => new ButterflyEntity());
+
+    // Butterflies gently glide towards cursor on hover
+    window.addEventListener('pointermove', (e) => {
+      if (Math.random() < 0.05 && butterflies.length > 0) {
+        const chosen = butterflies[Math.floor(Math.random() * butterflies.length)];
+        chosen.targetX = e.clientX + (Math.random() * 120 - 60);
+        chosen.targetY = e.clientY + (Math.random() * 120 - 60);
+      }
+    });
+
+    function loopButterflies() {
+      butterflies.forEach(b => b.update());
+      requestAnimationFrame(loopButterflies);
+    }
+    loopButterflies();
+
+    /* ==========================================================================
+       6. FX CANVAS: FALLING 3D ROSE PETALS & PULSING FIREFLIES
+       ========================================================================== */
+    const canvas = document.getElementById('fx-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let w = (canvas.width = window.innerWidth);
+    let h = (canvas.height = window.innerHeight);
+
+    window.addEventListener('resize', () => {
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    class RealisticPetal {
+      constructor() {
+        this.init(true);
+      }
+
+      init(randomY = false) {
+        this.x = Math.random() * w;
+        this.y = randomY ? Math.random() * h : -25;
+        this.size = 11 + Math.random() * 14;
+        this.speedY = 0.9 + Math.random() * 1.4;
+        this.speedX = Math.random() * 1.2 - 0.6;
+        this.rotX = Math.random() * 360;
+        this.rotY = Math.random() * 360;
+        this.rotZ = Math.random() * 360;
+        this.rotSpeedX = (Math.random() - 0.5) * 2;
+        this.rotSpeedY = (Math.random() - 0.5) * 2.5;
+        this.rotSpeedZ = (Math.random() - 0.5) * 1.5;
+        this.pinkHue = Math.random() > 0.4 ? 345 : 355;
+        this.opacity = 0.55 + Math.random() * 0.4;
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX + Math.sin(this.y * 0.008) * 1.2;
+        this.rotX += this.rotSpeedX;
+        this.rotY += this.rotSpeedY;
+        this.rotZ += this.rotSpeedZ;
+
+        if (this.y > h + 30) this.init(false);
+      }
+
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate((this.rotZ * Math.PI) / 180);
+        // Simulate 3D rotation tumble via 2D scale
+        const scaleX = Math.cos((this.rotX * Math.PI) / 180);
+        const scaleY = Math.sin((this.rotY * Math.PI) / 180);
+        ctx.scale(scaleX, scaleY);
+
+        ctx.beginPath();
+        // Cupped curved organic petal path
+        ctx.moveTo(0, -this.size);
+        ctx.bezierCurveTo(this.size * 0.8, -this.size * 0.8, this.size, 0, 0, this.size);
+        ctx.bezierCurveTo(-this.size, 0, -this.size * 0.8, -this.size * 0.8, 0, -this.size);
+
+        const grad = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+        grad.addColorStop(0, `hsla(${this.pinkHue}, 90%, 88%, ${this.opacity})`);
+        grad.addColorStop(0.7, `hsla(${this.pinkHue}, 80%, 65%, ${this.opacity})`);
+        grad.addColorStop(1, `hsla(${this.pinkHue - 15}, 85%, 45%, ${this.opacity * 0.8})`);
+
+        ctx.fillStyle = grad;
+        ctx.shadowColor = `rgba(255, 180, 200, 0.4)`;
+        ctx.shadowBlur = 6;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    class FireflyParticle {
+      constructor() {
+        this.x = Math.random() * w;
+        this.y = Math.random() * h;
+        this.r = 1.2 + Math.random() * 2.2;
+        this.pulse = Math.random() * Math.PI * 2;
+        this.pulseSpeed = 0.02 + Math.random() * 0.03;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = -0.2 - Math.random() * 0.5;
+      }
+
+      update() {
+        this.pulse += this.pulseSpeed;
+        this.x += this.speedX + Math.sin(this.pulse) * 0.4;
+        this.y += this.speedY;
+
+        if (this.y < -20) this.y = h + 20;
+        if (this.x < -20) this.x = w + 20;
+        if (this.x > w + 20) this.x = -20;
+      }
+
+      draw() {
+        const glow = (Math.sin(this.pulse) + 1) * 0.5;
+        if (glow < 0.05) return;
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 248, 190, ${glow * 0.9})`;
+        ctx.shadowColor = '#ffe27d';
+        ctx.shadowBlur = 12 * glow;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    // Dynamic pollen bursts on clicks
+    const sparkParticles = [];
+    function createPollenBurst(x, y) {
+      for (let i = 0; i < 18; i++) {
+        sparkParticles.push({
+          x, y,
+          vx: (Math.random() - 0.5) * 6,
+          vy: (Math.random() - 0.5) * 6 - 1.5,
+          life: 1,
+          decay: 0.02 + Math.random() * 0.02,
+          size: 2 + Math.random() * 3,
+          hue: 45 + Math.random() * 300
+        });
+      }
+    }
+
+    function triggerFlowerSparkles(x, y) {
+      createPollenBurst(x, y);
+    }
+
+    const petals = Array.from({ length: 36 }, () => new RealisticPetal());
+    const fireflies = Array.from({ length: 32 }, () => new FireflyParticle());
+
+    function fxCanvasLoop() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Render Fireflies
+      fireflies.forEach(f => {
+        f.update();
+        f.draw();
+      });
+
+      // Render Falling Rose Petals
+      petals.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      // Render Click Pollen Sparks
+      for (let i = sparkParticles.length - 1; i >= 0; i--) {
+        const sp = sparkParticles[i];
+        sp.x += sp.vx;
+        sp.y += sp.vy;
+        sp.life -= sp.decay;
+        sp.vy += 0.08; // gravity
+
+        if (sp.life <= 0) {
+          sparkParticles.splice(i, 1);
+          continue;
+        }
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(sp.x, sp.y, sp.size * sp.life, 0, Math.PI * 2);
+        ctx.fillStyle = `hsla(${sp.hue}, 90%, 80%, ${sp.life})`;
+        ctx.shadowColor = '#fff';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+
+      requestAnimationFrame(fxCanvasLoop);
+    }
+    fxCanvasLoop();
+
+    /* ==========================================================================
+       7. SOOTHING WEB AUDIO CHIMES (Synthesized ambient music, zero mp3 files!)
+       ========================================================================== */
+    let audioCtx = null;
+    let isAudioPlaying = false;
+    let melodyInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playGentleChime(freq = 440) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+        gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.14, audioCtx.currentTime + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 1.8);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start();
+        osc.stop(audioCtx.currentTime + 1.9);
+      } catch (err) {
+        // audio safeguard
+      }
+    }
+
+    // Peaceful pentatonic scales: C5, D5, E5, G5, A5, C6
+    const pentatonicScale = [523.25, 587.33, 659.25, 783.99, 880.00, 1046.50];
+
+    function toggleAudio() {
+      initAudio();
+      const iconOff = document.getElementById('audioIconOff');
+      const iconOn = document.getElementById('audioIconOn');
+
+      if (!isAudioPlaying) {
+        isAudioPlaying = true;
+        iconOff.style.display = 'none';
+        iconOn.style.display = 'block';
+        showToast("Melody of the meadow playing 🎶");
+
+        // Schedule periodic calm crystalline windchimes
+        playGentleChime(pentatonicScale[0]);
+        melodyInterval = setInterval(() => {
+          const note = pentatonicScale[Math.floor(Math.random() * pentatonicScale.length)];
+          playGentleChime(note);
+        }, 1800);
+      } else {
+        isAudioPlaying = false;
+        iconOff.style.display = 'block';
+        iconOn.style.display = 'none';
+        clearInterval(melodyInterval);
+      }
+    }
+
+    document.getElementById('btnAudioToggle').addEventListener('click', toggleAudio);
+
+    /* ==========================================================================
+       8. MODAL LETTER LOGIC & NOTIFICATION TOAST
+       ========================================================================== */
+    const modalBackdrop = document.getElementById('modalBackdrop');
+    const btnOpenLetter = document.getElementById('btnOpenLetter');
+    const btnCloseLetter = document.getElementById('btnCloseLetter');
+    const bloomToast = document.getElementById('bloomToast');
+    let toastTimeout = null;
+
+    btnOpenLetter.addEventListener('click', () => {
+      initAudio();
+      playGentleChime(523.25);
+      modalBackdrop.classList.add('active');
+    });
+
+    btnCloseLetter.addEventListener('click', () => {
+      playGentleChime(659.25);
+      modalBackdrop.classList.remove('active');
+    });
+
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) {
+        modalBackdrop.classList.remove('active');
+      }
+    });
+
+    function showToast(text) {
+      bloomToast.textContent = text;
+      bloomToast.classList.add('show');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        bloomToast.classList.remove('show');
+      }, 3200);
+    }
+
+    // Start everything once document loads
+    window.addEventListener('DOMContentLoaded', () => {
+      populateMeadow();
+      animateMeadowWind();
+    });
+  </script>
+</body>
+</html>
